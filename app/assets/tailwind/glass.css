@@ -1,0 +1,66 @@
+/*
+ * Glass theme. Surface and container tokens are translucent, so the page
+ * paints soft blooms behind them. Colors come from tokens and flip with
+ * [data-theme=dark].
+ *
+ * backdrop-filter is limited to floating panels: on an in-flow container it
+ * creates a stacking context and a containing block for fixed descendants,
+ * which traps dropdowns under sibling content and misplaces fixed bars.
+ */
+html,
+body {
+  background-color: var(--color-page);
+}
+
+body {
+  background-image:
+    radial-gradient(52rem 40rem at 6% -8%, var(--color-glass-bloom-1), transparent 70%),
+    radial-gradient(46rem 36rem at 98% 106%, var(--color-glass-bloom-2), transparent 70%),
+    radial-gradient(38rem 30rem at 58% 42%, var(--color-glass-bloom-3), transparent 70%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* A light top edge gives containers the look of a pane of glass. */
+.bg-container {
+  background-image: linear-gradient(to bottom, var(--color-glass-edge), transparent 1.5px);
+}
+
+/* Floating panels sit over detailed content, so they blur what is behind. */
+[data-ds--menu-target="content"] > .bg-container,
+[data-ds--popover-target="content"] > .bg-container,
+.absolute.z-50.bg-container {
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  backdrop-filter: blur(24px) saturate(140%);
+}
+
+/* Dialogs and drawers stay nearly opaque: menus inside them position as fixed. */
+[data-ds--dialog-target="content"] {
+  background-color: color-mix(in srgb, var(--color-page) 94%, transparent);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  body,
+  .bg-container {
+    background-image: none;
+  }
+
+  .bg-container,
+  .bg-container-inset {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background-color: var(--color-page);
+  }
+}
+
+@media print {
+  body,
+  .bg-container {
+    background-image: none;
+  }
+
+  .bg-container {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
