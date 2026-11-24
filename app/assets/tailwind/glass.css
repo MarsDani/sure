@@ -1,0 +1,56 @@
+/*
+ * Glass theme. Surface and container tokens are translucent, so the page
+ * paints soft blooms behind them and containers blur what shows through.
+ * Colors come from tokens and flip with [data-theme=dark].
+ */
+html,
+body {
+  background-color: var(--color-page);
+}
+
+body {
+  background-image:
+    radial-gradient(52rem 40rem at 6% -8%, var(--color-glass-bloom-1), transparent 70%),
+    radial-gradient(46rem 36rem at 98% 106%, var(--color-glass-bloom-2), transparent 70%),
+    radial-gradient(38rem 30rem at 58% 42%, var(--color-glass-bloom-3), transparent 70%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* Cards, menus and panels: blur the backdrop and catch light on the top edge. */
+.bg-container {
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  backdrop-filter: blur(24px) saturate(140%);
+  background-image: linear-gradient(to bottom, var(--color-glass-edge), transparent 1.5px);
+}
+
+.bg-container-inset {
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  body {
+    background-image: none;
+  }
+
+  .bg-container,
+  .bg-container-inset {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background-color: var(--color-page);
+  }
+}
+
+@media print {
+  body {
+    background-image: none;
+  }
+
+  .bg-container,
+  .bg-container-inset {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background-image: none;
+  }
+}
