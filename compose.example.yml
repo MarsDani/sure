@@ -77,7 +77,15 @@ x-rails-env: &rails_env
   LEGAL_PRIVACY_URL: ${LEGAL_PRIVACY_URL:-}
   LEGAL_TERMS_URL: ${LEGAL_TERMS_URL:-}
   # NOTE: enabling OpenAI will incur costs when you use AI-related features in the app (chat, rules).  Make sure you have set appropriate spend limits on your account before adding this.
-  OPENAI_ACCESS_TOKEN: ${OPENAI_ACCESS_TOKEN}
+  # Name shown across the app; any value other than "Sure" hides upstream branding and community links
+  PRODUCT_NAME: ${PRODUCT_NAME:-Finance}
+  BRAND_NAME: ${BRAND_NAME:-}
+  # Native Anthropic provider; see docs/hosting/ai.md
+  LLM_PROVIDER: ${LLM_PROVIDER:-}
+  ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+  ANTHROPIC_MODEL: ${ANTHROPIC_MODEL:-}
+  ANTHROPIC_MAX_TOKENS: ${ANTHROPIC_MAX_TOKENS:-}
+  OPENAI_ACCESS_TOKEN: ${OPENAI_ACCESS_TOKEN:-}
   OPENAI_MODEL: ${OPENAI_MODEL:-}
   OPENAI_URI_BASE: ${OPENAI_URI_BASE:-}
   LLM_CONTEXT_WINDOW: ${LLM_CONTEXT_WINDOW:-}
